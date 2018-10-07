@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import Select from "./Select";
 
 function Header(props) {
   return (
@@ -11,26 +12,11 @@ function Header(props) {
           src="https://www.logolynx.com/images/logolynx/51/517dccbc6c88e146124619c16e335769.png"
         />
       </div>
-      <select
-        defaultValue=""
-        onChange={e => props.changeHandler("type", e.target.value)}
-      >
-        <option value="" disabled selected>
-          Select Type
-        </option>
-        <option value="">All</option>
-        <option value="aberration">Aberration</option>
-        <option value="beast">Beast</option>
-        <option value="construct">Construct</option>
-        <option value="dragon">Dragon</option>
-        <option value="elemental">Elemental</option>
-        <option value="fey">Fey</option>
-        <option value="giant">Giant</option>
-        <option value="humanoid">Humanoid</option>
-        <option value="ooze">Ooze</option>
-        <option value="plant">Plant</option>
-        <option value="undead">Undead</option>
-      </select>
+      <Select
+        changeHandler={props.changeHandler}
+        toggleBattleField={props.toggleBattleField}
+        battleFieldToggle={props.battleFieldtoggle}
+      />
       <input
         onChange={e =>
           props.changeHandler("minChallengeRating", e.target.value)

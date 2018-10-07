@@ -6,8 +6,13 @@ class BattleField extends Component {
     super(props);
     this.state = {
       partySize: 4,
-      partyLevel: 3
+      partyLvl: 3
     };
+    this.crChangeHandler = this.crChangeHandler.bind(this);
+  }
+
+  crChangeHandler(key, val) {
+    this.setState({ [key]: val });
   }
 
   render() {
@@ -52,11 +57,23 @@ class BattleField extends Component {
                 <p>{Object.entries(element) + ": " + Object.entries(element)}</p>
               ))
             : null} */}
+        <button
+          value="elem.index"
+          onClick={() => this.props.deleteBattleCard(elem.index)}
+          className="cardButton"
+        >
+          Delete
+        </button>
       </div>
     ));
     return (
       <div>
-        <BattleHeader />
+        <BattleHeader
+          partySize={this.state.partySize}
+          partyLvl={this.state.partyLvl}
+          crChangeHandler={this.crChangeHandler}
+          battleField={this.props.battleField}
+        />
         <div className="battlefieldCardContainer" />
         <div className="">
           <div className="cardContainer">{battleFieldDisplay} </div>

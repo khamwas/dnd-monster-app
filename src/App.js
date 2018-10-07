@@ -18,7 +18,8 @@ class App extends Component {
       maxChallengeRating: 30,
       type: "",
       currentCard: [],
-      toggleBattleField: false
+      toggleBattleField: false,
+      changeStatus: false
     };
     this.changePage = this.changePage.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
@@ -27,6 +28,10 @@ class App extends Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.showMore = this.showMore.bind(this);
     this.battleFieldtoggle = this.battleFieldtoggle.bind(this);
+    this.cloneMonster = this.cloneMonster.bind(this);
+    this.editMonster = this.editMonster.bind(this);
+    this.statusChanger = this.statusChanger.bind(this);
+    this.deleteBattleCard = this.deleteBattleCard.bind(this);
     // this.maxChallengeChecker = this.maxChallengeChecker.bind(this);
   }
 
@@ -56,6 +61,10 @@ class App extends Component {
     }
   }
 
+  statusChanger() {
+    this.setState({ changeStatus: !this.state.changeStatus });
+  }
+
   changeHandler(type, val) {
     if (type === "maxChallengeRating" && val < 1) {
       this.setState({ maxChallengeRating: 30 });
@@ -72,8 +81,20 @@ class App extends Component {
   resetPage() {
     this.setState({
       pageStart: 0,
-      pageEnd: 6
+      pageEnd: 8
     });
+  }
+
+  deleteBattleCard(monsterIndex) {
+    // console.log(monsterIndex);
+    let deleteId = monsterIndex;
+    let monsterId = this.state.battleField.findIndex(
+      monster => monster.index === deleteId
+    );
+    let newBattlefield = this.state.battleField.slice();
+    newBattlefield.splice(monsterId, 1);
+    this.setState({ battleField: newBattlefield });
+    axios.delete(`http://localhost:3001/api/battlefield/:${monsterIndex}`);
   }
 
   deleteCard(monsterIndex) {
@@ -99,6 +120,10 @@ class App extends Component {
     axios.post(`http://localhost:3001/api/battlefield/:${monsterIndex}`);
   }
 
+  editMonster(monsterIndex) {}
+
+  cloneMonster(monsterIndex) {}
+
   showMore(monsterIndex) {
     let newCurrentCard = [];
     let monsterId = this.state.monsters.findIndex(
@@ -118,6 +143,10 @@ class App extends Component {
     if (!this.state.toggleBattleField) {
       dictionaryDisplay = (
         <Dictionary
+          statusChanger={this.statusChanger}
+          changeStatus={this.state.changeStatus}
+          cloneMonster={this.cloneMonster}
+          editMonster={this.editMonster}
           toggleBattleField={this.state.toggleBattleField}
           pageStart={this.state.pageStart}
           pageEnd={this.state.pageEnd}
@@ -144,7 +173,10 @@ class App extends Component {
           battleFieldToggle={this.battleFieldtoggle}
         />
         {dictionaryDisplay}
-        <BattleField battleField={this.state.battleField} />
+        <BattleField
+          deleteBattleCard={this.deleteBattleCard}
+          battleField={this.state.battleField}
+        />
       </div>
     );
   }

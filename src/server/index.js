@@ -17,10 +17,11 @@ app.put("/api/monsters/:id", mc.putMonsters);
 
 app.delete("/api/monsters/:id", mc.deleteMonsters);
 
-app.get("/api/battlefield/",mc.getBattleField);
+app.get("/api/battlefield/", mc.getBattleField);
 
-app.post("/api/battlefield/:id",mc.postBattleField);
+app.post("/api/battlefield/:id", mc.postBattleField);
 
+app.delete("/api/battlefield/:id", mc.deleteBattleField);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

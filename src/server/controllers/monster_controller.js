@@ -46,5 +46,14 @@ module.exports = {
     battleField.push(monsters[monsterId]);
     res.status(200).json(battleField);
     console.log(battleField.map(elem => elem.name));
+  },
+  deleteBattleField: (req, res, next) => {
+    let deleteId = req.params.id;
+    monsterId = battleField.findIndex(
+      monster => ":" + monster.index == deleteId
+    );
+    battleField.splice(monsterId, 1);
+    res.status(200).json(battleField);
+    console.log(battleField.map(elem => elem.name));
   }
 };
