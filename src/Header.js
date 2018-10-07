@@ -49,7 +49,14 @@ function Header(props) {
         onChange={e => props.changeHandler("name", e.target.value)}
         placeholder="Monster Name"
       />
-      <div className="headerSide" />
+      <div className="headerSide">
+        <button
+          onClick={() => props.battleFieldToggle()}
+          className="battleButton"
+        >
+          Battle
+        </button>
+      </div>
     </header>
   );
 }

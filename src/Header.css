@@ -11,3 +11,19 @@
 .logoImg {
   max-height: 50px;
 }
+
+.battleButton {
+  background: red;
+  color: white;
+  min-height: 40px;
+  min-width: 50px;
+  border-radius: 30%;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.battleButton:hover {
+  background: white;
+  color: red;
+  cursor: pointer;
+}

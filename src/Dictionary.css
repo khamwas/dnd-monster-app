@@ -29,7 +29,7 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  left: 8%;
+  left: 30%;
   bottom: 0px;
   overflow: auto;
 }
@@ -108,4 +108,27 @@
   background: white;
   min-width: 400px;
   max-width: 600px;
+}
+
+.infoButton {
+  margin: 5px;
+  border-radius: 30%;
+  min-height: 35px;
+  min-width: 50px;
+  color: white;
+  background: #e80d0d;
+}
+.infoButton:hover {
+  cursor: pointer;
+}
+
+.infoButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  justify-self: center;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
 }

@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Header from "./Header";
 import Dictionary from "./Dictionary";
+import BattleField from "./BattleField";
 
 class App extends Component {
   constructor() {
@@ -12,11 +13,12 @@ class App extends Component {
       monsters: [],
       name: "",
       pageStart: 0,
-      pageEnd: 6,
+      pageEnd: 8,
       minChallengeRating: 0.25,
       maxChallengeRating: 30,
       type: "",
-      currentCard: []
+      currentCard: [],
+      toggleBattleField: false
     };
     this.changePage = this.changePage.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
@@ -24,6 +26,7 @@ class App extends Component {
     this.addToBattleField = this.addToBattleField.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.showMore = this.showMore.bind(this);
+    this.battleFieldtoggle = this.battleFieldtoggle.bind(this);
     // this.maxChallengeChecker = this.maxChallengeChecker.bind(this);
   }
 
@@ -42,13 +45,13 @@ class App extends Component {
   changePage(direction) {
     if (direction === "up") {
       this.setState({
-        pageStart: this.state.pageStart + 6,
-        pageEnd: this.state.pageEnd + 6
+        pageStart: this.state.pageStart + 8,
+        pageEnd: this.state.pageEnd + 8
       });
     } else {
       this.setState({
-        pageStart: this.state.pageStart - 6,
-        pageEnd: this.state.pageEnd - 6
+        pageStart: this.state.pageStart - 8,
+        pageEnd: this.state.pageEnd - 8
       });
     }
   }
@@ -105,72 +108,17 @@ class App extends Component {
     this.setState({ currentCard: newCurrentCard });
   }
 
-  render() {
-    let battleFieldDisplay = this.state.battleField.map(elem => (
-      <div className="card" key={elem.index}>
-        <div className="cardHeader">
-          <h4>
-            Challenge Rating:
-            {elem.challenge_rating}
-          </h4>
-          <h2>
-            Name:
-            {elem.name}
-          </h2>
-        </div>
-        <h4>
-          Type:
-          {elem.type}
-          <br />
-          speed:
-          {elem.speed}
-          <br />
-          Size:
-          {elem.size}
-          <br />
-          Armor Class:
-          {elem.armor_class}
-          <br />
-          Hit Points:
-          {elem.hit_points}
-        </h4>
-        {/* <h4>Special Abilities:</h4> */}
-        {/* <p>{JSON.stringify(elem.special_abilities)}</p> */}
-        {/* {elem.special_abilities
-            ? elem.special_abilities.map((element, i) => (
-                <p>{Object.entries(element) + "    "}</p>
-              ))
-            : null} */}
-        {/* <h4>Legendary Actions:</h4>
-        {elem.legendary_actions
-          ? elem.legendary_actions.map((element, i) => (
-              <p>{Object.entries(element) + ": " + Object.entries(element)}</p>
-            ))
-          : null} */}
-        <div className="cardButtonContainer">
-          <button
-            onClick={() => this.addToBattleField(elem.index)}
-            className="cardButton"
-          >
-            Add
-          </button>
-          <button
-            value="elem.index"
-            onClick={() => this.deleteCard(elem.index)}
-            className="cardButton"
-          >
-            Delete
-          </button>
-          <button className="cardButton">Edit</button>
-          <button className="cardButton">Clone</button>
-        </div>
-      </div>
-    ));
+  battleFieldtoggle() {
+    this.setState({ toggleBattleField: !this.state.toggleBattleField });
+    console.log(this.state.toggleBattleField);
+  }
 
-    return (
-      <div className="masterDisplay">
-        <Header changeHandler={this.changeHandler} />
+  render() {
+    let dictionaryDisplay = null;
+    if (!this.state.toggleBattleField) {
+      dictionaryDisplay = (
         <Dictionary
+          toggleBattleField={this.state.toggleBattleField}
           pageStart={this.state.pageStart}
           pageEnd={this.state.pageEnd}
           resetPage={this.resetPage}
@@ -186,11 +134,17 @@ class App extends Component {
           currentCard={this.state.currentCard}
           showMore={this.showMore}
         />
-        <div className="battlefieldCardContainer" />
-        <div className="cardAndInfo">
-          <div className="cardContainer">{battleFieldDisplay} </div>
-          <div className="moreInfo" />
-        </div>
+      );
+    }
+    return (
+      <div className="masterDisplay">
+        <Header
+          changeHandler={this.changeHandler}
+          toggleBattleField={this.state.toggleBattleField}
+          battleFieldToggle={this.battleFieldtoggle}
+        />
+        {dictionaryDisplay}
+        <BattleField battleField={this.state.battleField} />
       </div>
     );
   }

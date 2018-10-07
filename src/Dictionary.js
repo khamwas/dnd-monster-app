@@ -26,7 +26,7 @@ class Dictionary extends Component {
     ));
 
     let moreInfo = this.props.currentCard.map(elem => (
-      <div>
+      <div className="infoContainer">
         <div className="infoHeader">
           <h4>
             Challenge Rating:
@@ -54,7 +54,7 @@ class Dictionary extends Component {
           {elem.hit_points}
         </h4>
         <h4>Special Abilities:</h4>
-        <p>{JSON.stringify(elem.special_abilities)}</p>
+        {/* <p>{JSON.stringify(elem.special_abilities)}</p> */}
         {elem.special_abilities
           ? elem.special_abilities.map((element, i) => (
               <p>{Object.entries(element) + "    "}</p>
@@ -66,6 +66,10 @@ class Dictionary extends Component {
               <p>{Object.entries(element) + ": " + Object.entries(element)}</p>
             ))
           : null}
+        <div className="infoButtonContainer">
+          <button className="infoButton">Edit</button>
+          <button className="infoButton">Clone</button>
+        </div>
       </div>
     ));
 
@@ -136,8 +140,6 @@ class Dictionary extends Component {
             >
               Delete
             </button>
-            <button className="cardButton">Edit</button>
-            <button className="cardButton">Clone</button>
           </div>
         </div>
       ));
@@ -145,7 +147,7 @@ class Dictionary extends Component {
     return (
       <div className="monsterDisplay">
         <div className="cardAndInfo">
-          <div className="cardContainer">{display} </div>
+          <div className="cardContainer">{display}</div>
           <div className="moreInfo">
             {this.props.currentCard.length == 0 ? noInfo : moreInfo}
           </div>
