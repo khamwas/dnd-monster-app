@@ -13,7 +13,7 @@ let id = 326;
 
 module.exports = {
   getIndex: (req, res, next) => {
-    res.status(200).json(monsters.length + 3);
+    res.status(200).json(id);
   },
   getMonsters: (req, res, next) => {
     res.status(200).json(monsters);
@@ -21,6 +21,7 @@ module.exports = {
 
   postMonsters: (req, res, next) => {
     monsters.push(req.body);
+    id++;
     console.log(monsters[monsters.length - 1]);
     res.status(200).json(monsters);
   },
