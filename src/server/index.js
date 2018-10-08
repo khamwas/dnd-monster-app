@@ -21,7 +21,7 @@ app.get("/api/battlefield/", mc.getBattleField);
 
 app.post("/api/battlefield/:id", mc.postBattleField);
 
-app.put("api/battlefield/:id", mc.putBattleField);
+app.put("/api/battlefield/edit", mc.putBattleField);
 
 app.delete("/api/battlefield/:id", mc.deleteBattleField);
 

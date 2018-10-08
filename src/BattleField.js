@@ -67,6 +67,8 @@ class BattleField extends Component {
             placeholder={elem.hit_points}
             defaultValue={elem.hit_points}
           />
+          <br />
+          {elem.img ? <img className="cardImg" src={elem.img} /> : null}
         </h4>
         {/* <h4>Special Abilities:</h4> */}
         {/* <p>{JSON.stringify(elem.special_abilities)}</p> */}

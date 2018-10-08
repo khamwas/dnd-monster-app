@@ -87,6 +87,10 @@ class App extends Component {
     );
     Object.assign(battleFieldCopy[monsterId], newHp);
     this.setState({ battleField: battleFieldCopy });
+    axios.put(
+      `http://localhost:3001/api/battlefield/edit`,
+      battleFieldCopy[monsterId]
+    );
     console.log(this.state.battleField);
   }
 

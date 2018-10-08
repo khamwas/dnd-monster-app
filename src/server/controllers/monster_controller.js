@@ -50,7 +50,17 @@ module.exports = {
     console.log(battleField.map(elem => elem.name));
   },
 
-  putBattleField: (req, res, next) => {},
+  putBattleField: (req, res, next) => {
+    battleField.push(req.body);
+    let editId = req.body.index;
+    monsterId = battleField.findIndex(monster => monster.index == editId);
+
+    battleField.splice(monsterId, 1);
+    //edit code here
+    console.log(battleField);
+    res.status(200).json(monsters);
+  },
+
   deleteBattleField: (req, res, next) => {
     let deleteId = req.params.id;
     monsterId = battleField.findIndex(
