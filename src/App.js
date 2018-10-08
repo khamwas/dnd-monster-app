@@ -83,18 +83,17 @@ class App extends Component {
   }
 
   dictClone(monsterIndex, obj) {
-    let newId = Object.assign({}, this.state.index);
+    let newId = Object.assign({}, { index: this.state.newIndex });
     let replace = Object.assign({}, obj);
     let monstersCopy = this.state.monsters.slice();
     let monsterId = monstersCopy.findIndex(
       monster => monster.index === monsterIndex
     );
-    let newObj = Object.assign({}, monstersCopy[monsterId], replace, {
-      index: newId
-    });
+    let newObj = Object.assign({}, monstersCopy[monsterId], replace, newId);
+    console.log(newObj);
     monstersCopy.push(newObj);
     this.setState({ monsters: monstersCopy });
-    this.setState({ index: newId++ });
+    this.state.newIndex++;
     this.statusChanger();
     axios.post(`http://localhost:3001/api/monsters/`, newObj);
   }
