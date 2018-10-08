@@ -20,7 +20,8 @@ class App extends Component {
       type: "",
       currentCard: [],
       toggleBattleField: false,
-      changeStatus: false
+      changeStatus: false,
+      newIndex: 326
     };
     this.changePage = this.changePage.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
@@ -36,6 +37,7 @@ class App extends Component {
     this.showBattleCard = this.showBattleCard.bind(this);
     this.hpMerger = this.hpMerger.bind(this);
     this.dictEdit = this.dictEdit.bind(this);
+    this.dictClone = this.dictClone.bind(this);
     // this.maxChallengeChecker = this.maxChallengeChecker.bind(this);
   }
 
@@ -78,6 +80,23 @@ class App extends Component {
       `http://localhost:3001/api/monsters/edit`,
       monstersCopy[monsterId]
     );
+  }
+
+  dictClone(monsterIndex, obj) {
+    let newId = Object.assign({}, this.state.index);
+    let replace = Object.assign({}, obj);
+    let monstersCopy = this.state.monsters.slice();
+    let monsterId = monstersCopy.findIndex(
+      monster => monster.index === monsterIndex
+    );
+    let newObj = Object.assign({}, monstersCopy[monsterId], replace, {
+      index: newId
+    });
+    monstersCopy.push(newObj);
+    this.setState({ monsters: monstersCopy });
+    this.setState({ index: newId++ });
+    this.statusChanger();
+    axios.post(`http://localhost:3001/api/monsters/`, newObj);
   }
 
   hpMerger(monsterIndex, newHp) {
@@ -192,6 +211,7 @@ class App extends Component {
     if (!this.state.toggleBattleField) {
       dictionaryDisplay = (
         <Dictionary
+          dictClone={this.dictClone}
           dictEdit={this.dictEdit}
           statusChanger={this.statusChanger}
           changeStatus={this.state.changeStatus}

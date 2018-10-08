@@ -28,6 +28,7 @@ class Dictionary extends Component {
 
     let moreInfo = (
       <MoreInfo
+        dictClone={this.props.dictClone}
         dictEdit={this.props.dictEdit}
         statusChanger={this.props.statusChanger}
         changeStatus={this.props.changeStatus}

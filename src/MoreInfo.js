@@ -160,7 +160,7 @@ class MoreInfo extends Component {
             Edit
           </button>
           <button
-            onClick={() => this.props.cloneMonster(elem.index)}
+            onClick={() => this.props.dictClone(elem.index, this.state)}
             className="infoButton"
           >
             Clone

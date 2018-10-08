@@ -18,6 +18,7 @@ module.exports = {
 
   postMonsters: (req, res, next) => {
     monsters.push(req.body);
+    console.log(monsters[monsters.length - 1]);
     res.status(200).json(monsters);
   },
   putMonsters: (req, res, next) => {
