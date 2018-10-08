@@ -9,6 +9,8 @@ const app = express();
 app.use(json());
 app.use(cors());
 
+app.get("/api/index", mc.getIndex);
+
 app.get("/api/monsters", mc.getMonsters);
 
 app.post("/api/monsters", mc.postMonsters);

@@ -12,6 +12,9 @@ let monsters = [];
 let id = 326;
 
 module.exports = {
+  getIndex: (req, res, next) => {
+    res.status(200).json(monsters.length);
+  },
   getMonsters: (req, res, next) => {
     res.status(200).json(monsters);
   },

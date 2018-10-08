@@ -43,14 +43,18 @@ class App extends Component {
 
   componentDidMount() {
     axios
+      .get("http://localhost:3001/api/index")
+      .then(result => this.setState({ newIndex: result.data }));
+    // .then(result => console.log(result.data));
+    axios
       .get("http://localhost:3001/api/monsters/")
-      .then(result => this.setState({ monsters: result.data }))
-      .then(result => console.log(this.state.monsters.length));
+      .then(result => this.setState({ monsters: result.data }));
+    // .then(result => console.log(this.state.monsters.length));
 
     axios
       .get("http://localhost:3001/api/battlefield/")
-      .then(result => this.setState({ battleField: result.data }))
-      .then(result => console.log(this.state.battleField));
+      .then(result => this.setState({ battleField: result.data }));
+    // .then(result => console.log(this.state.battleField));
   }
 
   changePage(direction) {
