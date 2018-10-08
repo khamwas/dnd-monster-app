@@ -1,0 +1,134 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+  padding: 15px;
+  margin: 10px;
+  min-width: 250px;
+  border: solid 1px black;
+  filter: drop-shadow(10px 10px 5px #646464c0);
+  max-width: 250px;
+  border-radius: 7%;
+  background: white;
+}
+.cardContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-flow: wrap;
+  background: #bcbcbc;
+}
+
+.card:hover {
+  background: #e80d0d;
+  color: white;
+}
+
+.cardButtonContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 30%;
+  bottom: 0px;
+  overflow: auto;
+}
+.cardButton {
+  margin: 5px;
+  border-radius: 30%;
+  /* background: gray;
+      color: white; */
+}
+
+.cardButton:hover {
+  cursor: pointer;
+}
+
+.cardHeader {
+  text-align: center;
+  background: #e80d0d;
+  color: white;
+  border-top-left-radius: 8%;
+  border-top-right-radius: 8%;
+  margin: -16px;
+  border-top: solid black 1px;
+  border-left: solid black 1px;
+  border-right: solid black 1px;
+}
+
+.cardHeader:hover {
+  background: white;
+  color: black;
+}
+
+.pageButtonContainer {
+  display: flex;
+  align-self: center;
+  background: #bcbcbc;
+}
+
+.pageButton {
+  margin: 25px;
+  align-self: center;
+  height: 40px;
+  border-radius: 30%;
+}
+
+.pageButton:hover {
+  cursor: pointer;
+}
+
+.monsterDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #bcbcbc;
+}
+
+.cardAndInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.infoHeader {
+  box-sizing: border-box;
+  padding: 5px;
+  background: #e80d0d;
+  color: white;
+  margin: -10px;
+  margin-top: -11px;
+}
+
+.moreInfo {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px;
+  background: white;
+  min-width: 400px;
+  max-width: 600px;
+}
+
+.infoButton {
+  margin: 5px;
+  border-radius: 30%;
+  min-height: 35px;
+  min-width: 50px;
+  color: white;
+  background: #e80d0d;
+}
+.infoButton:hover {
+  cursor: pointer;
+}
+
+.infoButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  justify-self: center;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}

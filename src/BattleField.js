@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import BattleHeader from "./BattleHeader";
+import BattleInfo from "./BattleInfo";
+import "./BattleField.css";
 
 class BattleField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      partySize: 4,
-      partyLvl: 3
+      partySize: 0,
+      partyLvl: 0,
+      prompt: ["Click Card for More Info"]
     };
     this.crChangeHandler = this.crChangeHandler.bind(this);
   }
@@ -16,8 +19,18 @@ class BattleField extends Component {
   }
 
   render() {
+    let battleInfo = <BattleInfo battleCard={this.props.battleCard} />;
+    let noInfo = this.state.prompt.map(elem => (
+      <div className="infoHeader">
+        <h1>{elem}</h1>
+      </div>
+    ));
     let battleFieldDisplay = this.props.battleField.map(elem => (
-      <div className="card" key={elem.index}>
+      <div
+        onClick={() => this.props.showBattleCard(elem.index)}
+        className="card"
+        key={elem.index}
+      >
         <div className="cardHeader">
           <h4>
             Challenge Rating:
@@ -42,7 +55,11 @@ class BattleField extends Component {
           {elem.armor_class}
           <br />
           Hit Points:
-          {elem.hit_points}
+          <input
+            type="number"
+            placeholder={elem.hit_points}
+            defaultValue={elem.hit_points}
+          />
         </h4>
         {/* <h4>Special Abilities:</h4> */}
         {/* <p>{JSON.stringify(elem.special_abilities)}</p> */}
@@ -74,12 +91,16 @@ class BattleField extends Component {
           crChangeHandler={this.crChangeHandler}
           battleField={this.props.battleField}
         />
-        <div className="battlefieldCardContainer" />
-        <div className="">
-          <div className="cardContainer">{battleFieldDisplay} </div>
-          <div className="moreInfo" />
+        <div className="monsterDisplay">
+          <div className="battlefieldCardContainer" />
+          <div className="cardAndInfo">
+            <div className="cardContainer">{battleFieldDisplay} </div>
+            <div className="moreInfo">
+              {this.props.battleCard.length == 0 ? noInfo : battleInfo}
+            </div>
+          </div>
+          ;
         </div>
-        ;
       </div>
     );
   }

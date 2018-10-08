@@ -10,6 +10,7 @@ class App extends Component {
     super();
     this.state = {
       battleField: [],
+      battleCard: [],
       monsters: [],
       name: "",
       pageStart: 0,
@@ -32,6 +33,7 @@ class App extends Component {
     this.editMonster = this.editMonster.bind(this);
     this.statusChanger = this.statusChanger.bind(this);
     this.deleteBattleCard = this.deleteBattleCard.bind(this);
+    this.showBattleCard = this.showBattleCard.bind(this);
     // this.maxChallengeChecker = this.maxChallengeChecker.bind(this);
   }
 
@@ -133,6 +135,15 @@ class App extends Component {
     this.setState({ currentCard: newCurrentCard });
   }
 
+  showBattleCard(monsterIndex) {
+    let newBattleCard = [];
+    let monsterId = this.state.battleField.findIndex(
+      monster => monster.index === monsterIndex
+    );
+    newBattleCard.push(this.state.battleField[monsterId]);
+    this.setState({ battleCard: newBattleCard });
+  }
+
   battleFieldtoggle() {
     this.setState({ toggleBattleField: !this.state.toggleBattleField });
     console.log(this.state.toggleBattleField);
@@ -174,6 +185,8 @@ class App extends Component {
         />
         {dictionaryDisplay}
         <BattleField
+          showBattleCard={this.showBattleCard}
+          battleCard={this.state.battleCard}
           deleteBattleCard={this.deleteBattleCard}
           battleField={this.state.battleField}
         />
