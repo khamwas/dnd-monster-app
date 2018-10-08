@@ -21,11 +21,13 @@ module.exports = {
     res.status(200).json(monsters);
   },
   putMonsters: (req, res, next) => {
-    let editId = req.params.id;
-    monsterId = monsters.findIndex(monster => monster.index == editId);
     monsters.push(req.body);
+    let editId = req.body.index;
+    monsterId = monsters.findIndex(monster => monster.index == editId);
+
     monsters.splice(monsterId, 1);
     //edit code here
+    console.log(req.body.index);
     res.status(200).json(monsters);
   },
   deleteMonsters: (req, res, next) => {
@@ -47,6 +49,8 @@ module.exports = {
     res.status(200).json(battleField);
     console.log(battleField.map(elem => elem.name));
   },
+
+  putBattleField: (req, res, next) => {},
   deleteBattleField: (req, res, next) => {
     let deleteId = req.params.id;
     monsterId = battleField.findIndex(

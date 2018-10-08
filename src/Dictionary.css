@@ -132,3 +132,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.cardImg {
+  max-width: 200px;
+  max-height: 200px;
+}

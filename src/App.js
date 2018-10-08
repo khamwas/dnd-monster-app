@@ -34,6 +34,8 @@ class App extends Component {
     this.statusChanger = this.statusChanger.bind(this);
     this.deleteBattleCard = this.deleteBattleCard.bind(this);
     this.showBattleCard = this.showBattleCard.bind(this);
+    this.hpMerger = this.hpMerger.bind(this);
+    this.dictEdit = this.dictEdit.bind(this);
     // this.maxChallengeChecker = this.maxChallengeChecker.bind(this);
   }
 
@@ -61,6 +63,31 @@ class App extends Component {
         pageEnd: this.state.pageEnd - 8
       });
     }
+  }
+
+  dictEdit(monsterIndex, obj) {
+    let replace = Object.assign({}, obj);
+    let monstersCopy = this.state.monsters.slice();
+    let monsterId = monstersCopy.findIndex(
+      monster => monster.index === monsterIndex
+    );
+    Object.assign(monstersCopy[monsterId], replace);
+    this.setState({ monsters: monstersCopy });
+    this.statusChanger();
+    axios.put(
+      `http://localhost:3001/api/monsters/edit`,
+      monstersCopy[monsterId]
+    );
+  }
+
+  hpMerger(monsterIndex, newHp) {
+    let battleFieldCopy = this.state.battleField.slice();
+    let monsterId = battleFieldCopy.findIndex(
+      monster => monster.index === monsterIndex
+    );
+    Object.assign(battleFieldCopy[monsterId], newHp);
+    this.setState({ battleField: battleFieldCopy });
+    console.log(this.state.battleField);
   }
 
   statusChanger() {
@@ -112,14 +139,21 @@ class App extends Component {
   }
   addToBattleField(monsterIndex) {
     let newBattleField = this.state.battleField.slice();
+    let monsterCopy = this.state.monsters.slice();
     let pushId = monsterIndex;
     let monsterId = this.state.monsters.findIndex(
       monster => monster.index === pushId
     );
-    newBattleField.push(this.state.monsters[monsterId]);
+    let newMonster = monsterCopy[monsterId];
+    newBattleField.push(newMonster);
     this.setState({ battleField: newBattleField });
     console.log(this.state.battleField);
-    axios.post(`http://localhost:3001/api/battlefield/:${monsterIndex}`);
+    axios.post(`http://localhost:3001/api/battlefield/:${monsterIndex}`).then(
+      axios
+        .get("http://localhost:3001/api/battlefield/")
+        .then(result => this.setState({ battleField: result.data }))
+        .then(result => console.log(this.state.battleField))
+    );
   }
 
   editMonster(monsterIndex) {}
@@ -154,6 +188,7 @@ class App extends Component {
     if (!this.state.toggleBattleField) {
       dictionaryDisplay = (
         <Dictionary
+          dictEdit={this.dictEdit}
           statusChanger={this.statusChanger}
           changeStatus={this.state.changeStatus}
           cloneMonster={this.cloneMonster}
@@ -185,6 +220,7 @@ class App extends Component {
         />
         {dictionaryDisplay}
         <BattleField
+          hpMerger={this.hpMerger}
           showBattleCard={this.showBattleCard}
           battleCard={this.state.battleCard}
           deleteBattleCard={this.deleteBattleCard}

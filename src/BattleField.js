@@ -9,13 +9,19 @@ class BattleField extends Component {
     this.state = {
       partySize: 0,
       partyLvl: 0,
-      prompt: ["Click Card for More Info"]
+      prompt: ["Click Card for More Info"],
+      hitPoints: { hit_points: 0 }
     };
     this.crChangeHandler = this.crChangeHandler.bind(this);
   }
 
   crChangeHandler(key, val) {
     this.setState({ [key]: val });
+  }
+
+  hitPointer(e) {
+    this.setState({ hitPoints: { hit_points: e.target.value } });
+    console.log(this.state.hitPoints);
   }
 
   render() {
@@ -56,6 +62,7 @@ class BattleField extends Component {
           <br />
           Hit Points:
           <input
+            onChange={e => this.hitPointer(e)}
             type="number"
             placeholder={elem.hit_points}
             defaultValue={elem.hit_points}
@@ -80,6 +87,13 @@ class BattleField extends Component {
           className="cardButton"
         >
           Delete
+        </button>
+        <button
+          value="elem.index"
+          onClick={() => this.props.hpMerger(elem.index, this.state.hitPoints)}
+          className="cardButton"
+        >
+          Save
         </button>
       </div>
     ));

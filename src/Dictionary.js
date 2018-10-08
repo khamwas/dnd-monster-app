@@ -28,6 +28,7 @@ class Dictionary extends Component {
 
     let moreInfo = (
       <MoreInfo
+        dictEdit={this.props.dictEdit}
         statusChanger={this.props.statusChanger}
         changeStatus={this.props.changeStatus}
         cloneMonster={this.props.cloneMonster}
@@ -75,6 +76,8 @@ class Dictionary extends Component {
             <br />
             Hit Points:
             {elem.hit_points}
+            <br />
+            {elem.img ? <img className="cardImg" src={elem.img} /> : null}
           </h4>
           {/* <h4>Special Abilities:</h4> */}
           {/* <p>{JSON.stringify(elem.special_abilities)}</p> */}

@@ -3,7 +3,34 @@ import React, { Component } from "react";
 class MoreInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      challenge_rating: 0,
+      name: "",
+      type: "",
+      speed: "",
+      size: "",
+      armor_class: 0,
+      hit_points: 0,
+      img: ""
+    };
+  }
+
+  editHandler(key, val) {
+    this.setState({ [key]: val });
+    console.log(this.state);
+  }
+
+  setEdit(monster) {
+    this.setState({
+      challenge_rating: monster.challenge_rating,
+      name: monster.name,
+      type: monster.type,
+      speed: monster.speed,
+      size: monster.size,
+      armor_class: monster.armor_class,
+      hit_points: monster.hit_points
+    });
+    this.props.statusChanger();
   }
 
   render() {
@@ -49,16 +76,10 @@ class MoreInfo extends Component {
             ))
           : null}
         <div className="infoButtonContainer">
-          <button
-            onClick={() => this.props.statusChanger()}
-            className="infoButton"
-          >
+          <button onClick={() => this.setEdit(elem)} className="infoButton">
             Edit
           </button>
-          <button
-            onClick={() => this.props.statusChanger()}
-            className="infoButton"
-          >
+          <button onClick={() => this.setEdit(elem)} className="infoButton">
             Clone
           </button>
         </div>
@@ -71,28 +92,48 @@ class MoreInfo extends Component {
           <h4>
             Challenge Rating:
             <input
+              onChange={e =>
+                this.editHandler("challenge_rating", e.target.value)
+              }
               defaultValue={elem.challenge_rating}
               placeholder={elem.challenge_rating}
             />
           </h4>
           <h2>
             Name:
-            <input defaultValue={elem.name} placeholder={elem.name} />
+            <input
+              onChange={e => this.editHandler("name", e.target.value)}
+              defaultValue={elem.name}
+              placeholder={elem.name}
+            />
           </h2>
         </div>
         <h4>
           Type:
-          <input placeholder={elem.type} defaultValue={elem.type} />
+          <input
+            onChange={e => this.editHandler("type", e.target.value)}
+            placeholder={elem.type}
+            defaultValue={elem.type}
+          />
           <br />
           speed:
-          <input placeholder={elem.speed} defaultValue={elem.speed} />
+          <input
+            onChange={e => this.editHandler("speed", e.target.value)}
+            placeholder={elem.speed}
+            defaultValue={elem.speed}
+          />
           <br />
           Size:
-          <input placeholder={elem.size} defaultValue={elem.size} />
+          <input
+            onChange={e => this.editHandler("size", e.target.value)}
+            placeholder={elem.size}
+            defaultValue={elem.size}
+          />
           <br />
           Armor Class:
           <input
             type="number"
+            onChange={e => this.editHandler("armor_class", e.target.value)}
             placeholder={elem.armor_class}
             defaultValue={elem.armor_class}
           />
@@ -100,13 +141,20 @@ class MoreInfo extends Component {
           Hit Points:
           <input
             type="number"
+            onChange={e => this.editHandler("hit_points", e.target.value)}
             placeholder={elem.hit_points}
             defaultValue={elem.hit_points}
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Image URL"
+            onChange={e => this.editHandler("img", e.target.value)}
           />
         </h4>
         <div className="infoButtonContainer">
           <button
-            onClick={() => this.props.editMonster(elem.index)}
+            onClick={() => this.props.dictEdit(elem.index, this.state)}
             className="infoButton"
           >
             Edit

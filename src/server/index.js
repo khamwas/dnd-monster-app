@@ -13,13 +13,15 @@ app.get("/api/monsters", mc.getMonsters);
 
 app.post("/api/monsters", mc.postMonsters);
 
-app.put("/api/monsters/:id", mc.putMonsters);
+app.put("/api/monsters/edit", mc.putMonsters);
 
 app.delete("/api/monsters/:id", mc.deleteMonsters);
 
 app.get("/api/battlefield/", mc.getBattleField);
 
 app.post("/api/battlefield/:id", mc.postBattleField);
+
+app.put("api/battlefield/:id", mc.putBattleField);
 
 app.delete("/api/battlefield/:id", mc.deleteBattleField);
 
