@@ -13,7 +13,10 @@ let id = 326;
 
 module.exports = {
   getIndex: (req, res, next) => {
-    res.status(200).json(id);
+    res
+      .status(200)
+      .json(id)
+      .catch(err => res.status(500).send(err));
   },
   getMonsters: (req, res, next) => {
     res.status(200).json(monsters);

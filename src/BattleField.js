@@ -115,7 +115,6 @@ class BattleField extends Component {
               {this.props.battleCard.length == 0 ? noInfo : battleInfo}
             </div>
           </div>
-          ;
         </div>
       </div>
     );

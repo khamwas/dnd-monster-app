@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Select from "./Select";
 
 class MoreInfo extends Component {
   constructor(props) {
