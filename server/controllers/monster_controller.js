@@ -4,7 +4,7 @@ let battleField = [];
 let monsters = [];
 let id = 326;
 
-axios.get('http://www.dnd5eapi.co/api/monsters/').then((response) => {
+axios.get('http://dnd5eapi.co/api/monsters/').then((response) => {
 	for (let i = 0; i < response.data.results.length; i++) {
 		axios.get(response.data.results[i].url).then((val) => {
 			monsters.push(val.data);
