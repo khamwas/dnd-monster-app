@@ -39,7 +39,7 @@ module.exports = {
 	deleteMonsters: (req, res, next) => {
 		// console.log(":" + monsters[0].index);
 		let deleteId = req.params.id;
-		monsterId = monsters.findIndex(
+		let monsterId = monsters.findIndex(
 			(monster) => ':' + monster.index == deleteId
 		);
 		monsters.splice(monsterId, 1);
