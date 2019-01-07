@@ -140,6 +140,18 @@ class App extends Component {
 		});
 	}
 
+	deleteBattleCard(monsterIndex) {
+		// console.log(monsterIndex);
+		let deleteId = monsterIndex;
+		let monsterId = this.state.battleField.findIndex(
+			(monster) => monster.index === deleteId
+		);
+		let newBattlefield = this.state.battleField.slice();
+		newBattlefield.splice(monsterId, 1);
+		this.setState({ battleField: newBattlefield });
+		axios.delete(`http://localhost:3001/api/battlefield/:${monsterIndex}`);
+	}
+
 	deleteCard(monsterIndex) {
 		// console.log(monsterIndex);
 		let deleteId = monsterIndex;
@@ -173,6 +185,29 @@ class App extends Component {
 	editMonster(monsterIndex) {}
 
 	cloneMonster(monsterIndex) {}
+
+	showMore(monsterIndex) {
+		let newCurrentCard = [];
+		let monsterId = this.state.monsters.findIndex(
+			(monster) => monster.index === monsterIndex
+		);
+		newCurrentCard.push(this.state.monsters[monsterId]);
+		this.setState({ currentCard: newCurrentCard });
+	}
+
+	showBattleCard(monsterIndex) {
+		let newBattleCard = [];
+		let monsterId = this.state.battleField.findIndex(
+			(monster) => monster.index === monsterIndex
+		);
+		newBattleCard.push(this.state.battleField[monsterId]);
+		this.setState({ battleCard: newBattleCard });
+	}
+
+	battleFieldtoggle() {
+		this.setState({ toggleBattleField: !this.state.toggleBattleField });
+		console.log(this.state.toggleBattleField);
+	}
 
 	render() {
 		let dictionaryDisplay = null;

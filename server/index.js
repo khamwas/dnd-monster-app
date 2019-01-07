@@ -1,17 +1,17 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { json } = require('body-parser');
 const mc = require('../server/controllers/monster_controller');
-// const port = process.env.PORT || 3001;
-const port = 3001;
+const port = process.env.PORT || 3001;
+// const port = 3001;
 
 const app = express();
 
 app.use(json());
 app.use(cors());
 
-// app.use(express.static(`${__dirname}/../build`));
+app.use(express.static(`${__dirname}/../build`));
 
 app.get('/api/index', mc.getIndex);
 
