@@ -1,8 +1,6 @@
 {
 	"name": "monster-hunter",
-	"main": "server/index.js",
 	"version": "0.1.0",
-	"private": true,
 	"engines": {
 		"npm": "5.7.1",
 		"node": "9.5.0"
@@ -19,7 +17,7 @@
 		"serve": "^10.1.1"
 	},
 	"scripts": {
-		"start": "node server/index.js",
+		"start": "node server",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
